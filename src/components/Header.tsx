@@ -1,4 +1,3 @@
-import '../styles/components/header.scss';
 import { Link, NavLink } from 'react-router-dom'
 import '../styles/components/header.scss';
 
