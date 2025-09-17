@@ -13,8 +13,9 @@ export default function Carousel({ title }: { title: string }) {
             <h3>{title}</h3>
             <div className="carousel-items">
                 {dummyFilms.map((film) => (
-                    <Card key={film.id} title={film.title} img={film.img} />
+                    <Card key={film.id} film={film} />
                 ))}
+
             </div>
         </div>
     )

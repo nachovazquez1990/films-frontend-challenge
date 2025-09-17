@@ -6,4 +6,5 @@ Cómo lo he hecho:
 2 - Crear repositorio<br />
 3 - Crear estuctura de archivos para el frontend (Sin SSR todavía)<br />
 4 - Crear layout de componentes con dummy data<br />
-5 - Añadir estilos a Home<br />
+5 - Añadir estilos provisionales<br />
+6 - Enrutar la app<br />

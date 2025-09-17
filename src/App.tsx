@@ -1,13 +1,18 @@
 import Header from './components/Header'
+import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import Film from './pages/Film'
+import Wishlist from './pages/Wishlist'
 
-function App() {
+export default function App() {
   return (
-    <div className='container'>
+    <div className="container">
       <Header />
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/film/:id" element={<Film />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+      </Routes>
     </div>
   )
 }
-
-export default App

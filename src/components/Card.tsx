@@ -1,10 +1,13 @@
-import '../styles/components/card.scss';
+import { Link } from 'react-router-dom'
+import '../styles/components/card.scss'
 
-export default function Card({ title, img }: { title: string; img: string }) {
+export type Film = { id: number; title: string; img: string }
+
+export default function Card({ film }: { film: Film }) {
     return (
-        <div className="card">
-            <img src={img} alt={title} />
-            <div className="title">{title}</div>
-        </div>
+        <Link to={`/film/${film.id}`} className="card">
+            <img src={film.img} alt={film.title} />
+            <div className="title">{film.title}</div>
+        </Link>
     )
 }
