@@ -1,0 +1,23 @@
+.wishlist {
+    margin-top: 1rem;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+
+    li {
+        position: relative;
+        background: #1f1f1f;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    button {
+        margin-top: .5rem;
+        width: 100%;
+    }
+}

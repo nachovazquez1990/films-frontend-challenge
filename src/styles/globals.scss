@@ -29,3 +29,39 @@ h4,
 h5 {
     color: $text-light;
 }
+
+ol,
+ul,
+li {
+    list-style: none;
+    text-decoration: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+button {
+    border: none;
+}
+
+button:focus {
+    outline: none;
+    border: none;
+}
+
+textarea {
+    resize: none;
+}
