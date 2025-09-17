@@ -1,4 +1,5 @@
 import Card from './Card'
+import '../styles/components/carousel.scss';
 
 const dummyFilms = [
     { id: 1, title: 'Jurassic Park', img: 'https://cdn.shopify.com/s/files/1/0057/3728/3618/files/jurassicpark.mpw_500x749.jpg?v=1713805481' },

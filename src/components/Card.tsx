@@ -1,3 +1,5 @@
+import '../styles/components/card.scss';
+
 export default function Card({ title, img }: { title: string; img: string }) {
     return (
         <div className="card">
