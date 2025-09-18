@@ -1,11 +1,8 @@
+import { useEffect, useState } from 'react'
 import Card from './Card'
 import '../styles/components/carousel.scss';
-
-const dummyFilms = [
-    { id: 1, title: 'Jurassic Park', img: 'https://cdn.shopify.com/s/files/1/0057/3728/3618/files/jurassicpark.mpw_500x749.jpg?v=1713805481' },
-    { id: 2, title: 'Gladiator', img: 'https://www.movieposters.com/cdn/shop/files/Gladiator.mpw.102813_480x.progressive.jpg?v=1707500493' },
-    { id: 3, title: 'Back To The Future', img: 'https://www.movieposters.com/cdn/shop/files/backtofuture.mpw_480x.progressive.jpg?v=1708444122' },
-]
+import type { FilmCard } from '../lib/types'
+import { GENRES, fetchMoviesByGenre } from '../lib/api'
 
 type Props = {
     title: string
@@ -13,11 +10,36 @@ type Props = {
 }
 
 export default function Carousel({ title, category }: Props) {
+    const [items, setItems] = useState<FilmCard[]>([])
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+        let active = true
+        setLoading(true)
+        setError(null)
+
+        fetchMoviesByGenre(GENRES[category])
+            .then((list) => {
+                if (!active) return
+                setItems(list)
+            })
+            .catch((e) => {
+                if (!active) return
+                setError(String(e))
+            })
+            .finally(() => active && setLoading(false))
+
+        return () => { active = false }
+    }, [category])
+
     return (
         <div className="carousel">
             <h3>{title}</h3>
             <div className="carousel-items">
-                {dummyFilms.map((film) => (
+                {loading && <div className="loading">Loading…</div>}
+                {error && <div className="error">{error}</div>}
+                {items.map((film) => (
                     <Card
                         key={film.id}
                         film={film}
