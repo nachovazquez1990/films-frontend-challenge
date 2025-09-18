@@ -1,40 +1,35 @@
-import { useParams, useLocation } from 'react-router-dom'
-import type { Film as FilmType } from '../components/Card'
-import { useWishlist } from '../state/wishlistStore'
-import '../styles/components/film.scss';
+import { useSearchParams, useLocation } from 'react-router-dom'
+import '../styles/components/film.scss'
+
+type FilmCard = { id: number; title: string; img?: string }
 
 export default function Film() {
-    const { id } = useParams()
-    const location = useLocation()
-    const film = (location.state as { film?: FilmType })?.film
+    const [sp] = useSearchParams()
+    const category = (sp.get('category') ?? 'adventure') as 'adventure' | 'action' | 'fantasy'
 
-    const add = useWishlist((s) => s.add)
-    const remove = useWishlist((s) => s.remove)
-    const has = useWishlist((s) => s.has)
-    const inWishlist = id ? has(Number(id)) : false
+    const location = useLocation()
+    const film = (location.state as { film?: FilmCard })?.film
 
     if (!film) {
         return (
-            <div>
+            <div className="film">
                 <p>No data, sorry</p>
             </div>
         )
     }
 
     return (
-        <div className="film">
-            <div>
-                <img src={film.img} alt={film.title} />
+        <div className={`film film--${category}`}>
+            <div className="film__media">
+                {film.img && <img src={film.img} alt={film.title} />}
             </div>
-            <div>
-                <h2>{film.title}</h2>
-                <p>Description....</p>
+            <div className="film__body">
+                <h2 className="film__title">{film.title}</h2>
+                <p className="film__overview">Descripción placeholder (más tarde vendrá de la API).</p>
 
-                {!inWishlist ? (
-                    <button onClick={() => add({ id: film.id, title: film.title, img: film.img })}> Add to wishlist </button>
-                ) : (
-                    <button onClick={() => remove(film.id)}> Remove from wishlist </button>
-                )}
+                <div className="film__actions">
+                    <button className="btn btn--primary">Add to wishlist</button>
+                </div>
             </div>
         </div>
     )

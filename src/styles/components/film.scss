@@ -1,11 +1,53 @@
+@import '../_variables';
+
 .film {
-    margin-top: 1rem;
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 2rem;
+    align-items: start;
+    margin-top: 1rem;
+}
 
-    img {
-        width: 100%;
-        border-radius: 10;
+.film__media img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}
+
+.film__title {
+    margin: 0 0 .5rem;
+}
+
+.film__overview {
+    line-height: 1.6;
+}
+
+.film--adventure {
+    font-family: Georgia, 'Times New Roman', serif;
+
+    .btn--primary {
+        background: $theme-adventure;
+    }
+}
+
+.film--action {
+    font-family: 'Courier New', Courier, monospace;
+
+    .btn--primary {
+        background: $theme-action;
+    }
+}
+
+.film--fantasy {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    .btn--primary {
+        background: $theme-fantasy;
+    }
+}
+
+@media (max-width: 860px) {
+    .film {
+        grid-template-columns: 1fr;
     }
 }

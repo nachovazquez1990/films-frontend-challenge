@@ -7,15 +7,23 @@ const dummyFilms = [
     { id: 3, title: 'Back To The Future', img: 'https://www.movieposters.com/cdn/shop/files/backtofuture.mpw_480x.progressive.jpg?v=1708444122' },
 ]
 
-export default function Carousel({ title }: { title: string }) {
+type Props = {
+    title: string
+    category: 'adventure' | 'action' | 'fantasy'
+}
+
+export default function Carousel({ title, category }: Props) {
     return (
         <div className="carousel">
             <h3>{title}</h3>
             <div className="carousel-items">
                 {dummyFilms.map((film) => (
-                    <Card key={film.id} film={film} />
+                    <Card
+                        key={film.id}
+                        film={film}
+                        to={`/film/${film.id}?category=${category}`}
+                    />
                 ))}
-
             </div>
         </div>
     )
