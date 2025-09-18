@@ -30,19 +30,19 @@
     }
 }
 
-.film--action {
+.film--history {
     font-family: 'Courier New', Courier, monospace;
 
     .btn--primary {
-        background: $theme-action;
+        background: $theme-history;
     }
 }
 
-.film--fantasy {
+.film--animation {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
     .btn--primary {
-        background: $theme-fantasy;
+        background: $theme-animation;
     }
 }
 

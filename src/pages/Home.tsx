@@ -4,8 +4,8 @@ export default function Home() {
     return (
         <>
             <Carousel title="Adventure" category="adventure" />
-            <Carousel title="Action" category="action" />
-            <Carousel title="Fantasy" category="fantasy" />
+            <Carousel title="History" category="history" />
+            <Carousel title="Animation" category="animation" />
         </>
     )
 }

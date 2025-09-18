@@ -6,7 +6,7 @@ import { GENRES, fetchMoviesByGenre } from '../lib/api'
 
 type Props = {
     title: string
-    category: 'adventure' | 'action' | 'fantasy'
+    category: 'adventure' | 'history' | 'animation'
 }
 
 export default function Carousel({ title, category }: Props) {

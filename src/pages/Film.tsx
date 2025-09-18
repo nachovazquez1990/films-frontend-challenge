@@ -8,7 +8,7 @@ import '../styles/components/film.scss'
 export default function Film() {
     const { id } = useParams()
     const [sp] = useSearchParams()
-    const category = (sp.get('category') ?? 'adventure') as 'adventure' | 'action' | 'fantasy'
+    const category = (sp.get('category') ?? 'adventure') as 'adventure' | 'history' | 'animation'
 
     const location = useLocation()
     const filmFromState = (location.state as { film?: FilmCard })?.film

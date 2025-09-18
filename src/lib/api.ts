@@ -24,8 +24,7 @@ export function imageUrl(
     return path ? `https://image.tmdb.org/t/p/${size}${path}` : ''
 }
 
-// Adventure: 12, Action: 28, Fantasy: 14
-export const GENRES = { adventure: 12, action: 28, fantasy: 14 } as const
+export const GENRES = { adventure: 12, history: 36, animation: 16 } as const
 export type Category = keyof typeof GENRES
 
 export async function fetchMoviesByGenre(genreId: number): Promise<FilmCard[]> {
