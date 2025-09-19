@@ -20,39 +20,59 @@ export default function Film() {
     const add = useWishlist((s) => s.add)
     const remove = useWishlist((s) => s.remove)
     const has = useWishlist((s) => s.has)
-    const inWishlist = id ? has(Number(id)) : false
 
     useEffect(() => {
         if (!id) return
-        let active = true
-        setLoading(true)
-        setError(null)
-        fetchMovieDetail(id)
-            .then((d) => active && setDetail(d))
-            .catch((e) => active && setError(String(e)))
-            .finally(() => active && setLoading(false))
-        return () => { active = false }
+        let cancelled = false
+            ; (async () => {
+                try {
+                    setLoading(true)
+                    setError(null)
+                    const d = await fetchMovieDetail(id)
+                    if (!cancelled) setDetail(d)
+                } catch (e: unknown) {
+                    if (!cancelled) {
+                        if (e instanceof Error) {
+                            setError(e.message)
+                        } else {
+                            setError('Error loading movies')
+                        }
+                    }
+                }
+                finally {
+                    if (!cancelled) setLoading(false)
+                }
+            })()
+        return () => {
+            cancelled = true
+        }
     }, [id])
 
-    if (!id) return <div className="film"><p>Missing id</p></div>
-
-    const title = detail?.title ?? filmFromState?.title ?? `Film ${id}`
-    const poster = imageUrl(detail?.poster_path, 'w500') || filmFromState?.img
-    const overview = detail?.overview ?? 'No description available yet'
-    const tagline = detail?.tagline
+    const title = detail?.title ?? filmFromState?.title ?? '…'
+    const poster = imageUrl(detail?.poster_path) ?? filmFromState?.img
+    const overview = detail?.overview ?? 'No overview available.'
+    const tagline = detail?.tagline ?? null
+    const inWishlist = has(Number(id))
 
     return (
         <div className={`film film--${category}`}>
             <div className="film__media">
-                {poster && <img src={poster} alt={title} />}
+                {poster ? <img src={poster} alt={title} /> : <div className="placeholder">No image</div>}
             </div>
-            <div className="film__body">
+            <div className="film__content">
+                {loading && <div className="loading">Loading…</div>}
+                {error && <div className="error">{error}</div>}
                 <h2 className="film__title">{title}</h2>
-                {tagline && <div className="film__tagline">“{tagline}”</div>}
-                {loading ? <p>Loading…</p> : error ? <p>{error}</p> : <p className="film__overview">{overview}</p>}
+                {tagline && <p className="film__tagline">“{tagline}”</p>}
+                <div className="film__overview">
+                    <p>{overview}</p>
+                </div>
                 <div className="film__actions">
                     {!inWishlist ? (
-                        <button className="btn btn--primary" onClick={() => add({ id: Number(id), title, img: poster })}>
+                        <button
+                            className="btn btn--primary"
+                            onClick={() => add({ id: Number(id), title, img: poster })}
+                        >
                             Add to wishlist
                         </button>
                     ) : (

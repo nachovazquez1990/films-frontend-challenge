@@ -14,25 +14,37 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
 }
 
-.film__title {
-    margin: 0 0 .5rem;
+.film__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.film__overview {
+.film__title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.film__tagline {
+    color: $text-muted;
+    font-style: italic;
+}
+
+.film__overview p {
     line-height: 1.6;
 }
 
-.film--adventure {
-    font-family: Georgia, 'Times New Roman', serif;
+.film__actions {
+    margin-top: .5rem;
+}
 
+.film--adventure {
     .btn--primary {
         background: $theme-adventure;
     }
 }
 
 .film--history {
-    font-family: 'Courier New', Courier, monospace;
-
     .btn--primary {
         background: $theme-history;
     }

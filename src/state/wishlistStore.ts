@@ -14,14 +14,14 @@ function load(): FilmCard[] {
     if (typeof window === 'undefined') return []
     try {
         const raw = localStorage.getItem(LS_KEY)
-        return raw ? JSON.parse(raw) : []
+        return raw ? (JSON.parse(raw) as FilmCard[]) : []
     } catch {
         return []
     }
 }
 
 export const useWishlist = create<WishlistState>((set, get) => ({
-    items: typeof window !== 'undefined' ? load() : [],
+    items: load(),
     add: (item) =>
         set((s) => {
             if (s.items.some((x) => x.id === item.id)) return s
