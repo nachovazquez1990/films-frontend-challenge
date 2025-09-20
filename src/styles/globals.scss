@@ -1,25 +1,10 @@
 @import './_variables';
 
-
+// RESET 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-body {
-    margin: 0;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: $background;
-    color: $text-light;
-}
-
-.container {
-    width: 95%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-top: 2rem;
 }
 
 h1,
@@ -42,44 +27,28 @@ a {
     text-decoration: inherit;
 }
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-img {
-    width: 100%;
-    height: auto;
-    vertical-align: bottom;
-}
-
 button {
-    border: none;
-}
-
-button:focus {
-    outline: none;
-    border: none;
-}
-
-textarea {
-    resize: none;
-}
-
-.btn {
-    padding: 0.7rem 1rem;
-    border: none;
-    border-radius: 6px;
+    border-radius: 0;
+    text-align: inherit;
+    background: none;
+    box-shadow: none;
+    padding: 0;
     cursor: pointer;
-    font-weight: 600;
+    border: none;
+    color: inherit;
+    font: inherit;
 }
 
-.btn--primary {
-    background: $accent;
-    color: white;
+// APP 
+body {
+    background-color: $background;
+    color: $text-light;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.btn--danger {
-    background: $failure;
-    color: white;
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 2rem;
 }

@@ -1,5 +1,5 @@
 import { useWishlist } from '../state/wishlistStore'
-import '../styles/components/wishlist.scss';
+import '../styles/pages/wishlist.scss';
 import Card from '../components/Card'
 
 export default function Wishlist() {
@@ -17,7 +17,7 @@ export default function Wishlist() {
                     {items.map((film) => (
                         <li key={film.id}>
                             <Card film={film} />
-                            <button onClick={() => remove(film.id)} >Remove</button>
+                            <button onClick={() => remove(film.id)} >x</button>
                         </li>
                     ))}
                 </ul>

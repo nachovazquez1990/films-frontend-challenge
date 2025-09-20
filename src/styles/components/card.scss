@@ -10,7 +10,7 @@
     position: relative;
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         box-shadow: 0 6px 20px $card-hover-shadow;
         z-index: 5;
     }
@@ -22,8 +22,8 @@
     }
 
     .title {
-        padding: 0.5rem;
-        font-size: 0.95rem;
+        padding: .5rem;
+        font-size: .85rem;
         text-align: center;
         color: $text-light;
     }

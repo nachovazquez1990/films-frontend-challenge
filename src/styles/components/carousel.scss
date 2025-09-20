@@ -4,29 +4,52 @@
     margin: 2rem 0;
 
     h3 {
-        margin: 0 0 1rem;
         font-size: 1.4rem;
         font-weight: 600;
         color: $text-light;
+    }
+
+    .carousel-wrapper {
+        position: relative;
     }
 
     .carousel-items {
         display: flex;
         gap: 1rem;
         overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        padding: 1rem;
 
-        // ocultar scrollbar
         &::-webkit-scrollbar {
-            height: 8px;
+            display: none;
+        }
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0.3em 0.5em;
+        border-radius: 10%;
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
 
-        &::-webkit-scrollbar-track {
-            background: transparent;
+        &.left {
+            left: -0.5rem;
         }
 
-        &::-webkit-scrollbar-thumb {
-            background: $text-muted;
-            border-radius: 4px;
+        &.right {
+            right: -0.5rem;
         }
     }
 }

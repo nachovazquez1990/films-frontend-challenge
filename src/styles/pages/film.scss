@@ -17,12 +17,21 @@
 .film__content {
     display: flex;
     flex-direction: column;
+    max-width: 500px;
     gap: 1rem;
 }
 
 .film__title {
     font-size: 2rem;
     font-weight: 700;
+}
+
+.film__category {
+    display: inline-block;
+    margin-top: -0.5rem;
+    padding: .15rem;
+    font-size: .6rem;
+    border-radius: 3px;
 }
 
 .film__tagline {
@@ -36,24 +45,41 @@
 
 .film__actions {
     margin-top: .5rem;
+
+    button {
+        font-size: .9rem;
+        padding: .5rem;
+        border-radius: 5px;
+    }
+
+    .btn--remove {
+        font-size: .9rem;
+        padding: .5rem;
+        border-radius: 5px;
+        background-color: $text-muted;
+    }
 }
 
 .film--adventure {
-    .btn--primary {
+
+    .btn,
+    .film__category {
         background: $theme-adventure;
     }
 }
 
 .film--history {
-    .btn--primary {
+
+    .btn,
+    .film__category {
         background: $theme-history;
     }
 }
 
 .film--animation {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-    .btn--primary {
+    .btn,
+    .film__category {
         background: $theme-animation;
     }
 }

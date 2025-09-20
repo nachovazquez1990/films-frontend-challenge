@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Card from './Card'
 import '../styles/components/carousel.scss'
 import type { FilmCard } from '../lib/types'
@@ -14,6 +14,8 @@ export default function Carousel({ title, category }: Props) {
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
+    const containerRef = useRef<HTMLDivElement>(null)
+
     useEffect(() => {
         let cancelled = false
         async function run() {
@@ -23,15 +25,8 @@ export default function Carousel({ title, category }: Props) {
                 const data = await fetchMoviesByGenre(category)
                 if (!cancelled) setItems(data)
             } catch (e: unknown) {
-                if (!cancelled) {
-                    if (e instanceof Error) {
-                        setError(e.message)
-                    } else {
-                        setError('Error loading movies')
-                    }
-                }
-            }
-            finally {
+                if (!cancelled) setError(e instanceof Error ? e.message : 'Error loading movies')
+            } finally {
                 if (!cancelled) setLoading(false)
             }
         }
@@ -41,17 +36,28 @@ export default function Carousel({ title, category }: Props) {
         }
     }, [category])
 
+    const scrollByCards = (dir: 'left' | 'right') => {
+        const el = containerRef.current
+        if (!el) return
+        const cardWidth = el.firstElementChild instanceof HTMLElement
+            ? el.firstElementChild.offsetWidth + 16
+            : 200
+        el.scrollBy({ left: dir === 'left' ? -cardWidth * 3 : cardWidth * 3, behavior: 'smooth' })
+    }
+
     return (
         <div className="carousel">
-            <div className="carousel-header">
-                <h3>{title}</h3>
-            </div>
-            <div className="carousel-items">
-                {loading && <div className="loading">Loading…</div>}
-                {error && <div className="error">{error}</div>}
-                {items.map((film) => (
-                    <Card key={film.id} film={film} to={`/film/${film.id}?category=${category}`} />
-                ))}
+            <h3>{title}</h3>
+            <div className="carousel-wrapper">
+                <button className="carousel-btn left" onClick={() => scrollByCards('left')}>‹</button>
+                <div className="carousel-items" ref={containerRef}>
+                    {loading && <div className="loading">Loading…</div>}
+                    {error && <div className="error">{error}</div>}
+                    {items.map((film) => (
+                        <Card key={film.id} film={film} to={`/film/${film.id}?category=${category}`} />
+                    ))}
+                </div>
+                <button className="carousel-btn right" onClick={() => scrollByCards('right')}>›</button>
             </div>
         </div>
     )

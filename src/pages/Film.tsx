@@ -3,7 +3,7 @@ import { useParams, useSearchParams, useLocation } from 'react-router-dom'
 import type { FilmCard, TMDBMovieDetail } from '../lib/types'
 import { fetchMovieDetail, imageUrl } from '../lib/api'
 import { useWishlist } from '../state/wishlistStore'
-import '../styles/components/film.scss'
+import '../styles/pages/film.scss'
 
 export default function Film() {
     const { id } = useParams()
@@ -79,9 +79,12 @@ export default function Film() {
                 {loading && <div className="loading">Loading…</div>}
                 {error && <div className="error">{error}</div>}
 
-                <h2 className="film__title">{title}</h2>
-                {tagline && <p className="film__tagline">“{tagline}”</p>}
+                <div>
+                    <h2 className="film__title">{title}</h2>
+                    <h3 className="film__category">{category}</h3>
+                </div>
 
+                {tagline && <p className="film__tagline">“{tagline}”</p>}
                 <div className="film__overview">
                     <p>{overview}</p>
                 </div>
@@ -90,14 +93,14 @@ export default function Film() {
                     <div className="film__actions">
                         {!inWishlist ? (
                             <button
-                                className="btn btn--primary"
+                                className="btn"
                                 onClick={() => add({ id: movieId, title, img: poster })}
                             >
                                 Add to wishlist
                             </button>
                         ) : (
                             <button
-                                className="btn btn--danger"
+                                className="btn--remove"
                                 onClick={() => remove(movieId)}
                             >
                                 Remove from wishlist
