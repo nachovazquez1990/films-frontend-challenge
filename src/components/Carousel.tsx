@@ -6,23 +6,32 @@ import { fetchMoviesByGenre } from '../lib/api'
 
 type Props = {
     title: string
-    category: 'adventure' | 'history' | 'animation'
+    category?: 'adventure' | 'history' | 'animation'
+    items?: FilmCard[]
 }
 
-export default function Carousel({ title, category }: Props) {
-    const [items, setItems] = useState<FilmCard[]>([])
+export default function Carousel({ title, category, items: externalItems }: Props) {
+    const [fetchedItems, setItems] = useState<FilmCard[]>([])
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
     const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        if (externalItems && externalItems.length >= 0) {
+            setLoading(false)
+            setError(null)
+            return
+        }
+        if (!category) return
+        const cat = category as 'adventure' | 'history' | 'animation'
+
         let cancelled = false
         async function run() {
             try {
                 setLoading(true)
                 setError(null)
-                const data = await fetchMoviesByGenre(category)
+                const data = await fetchMoviesByGenre(cat)
                 if (!cancelled) setItems(data)
             } catch (e: unknown) {
                 if (!cancelled) setError(e instanceof Error ? e.message : 'Error loading movies')
@@ -34,7 +43,8 @@ export default function Carousel({ title, category }: Props) {
         return () => {
             cancelled = true
         }
-    }, [category])
+    }, [category, externalItems])
+
 
     const scrollByCards = (dir: 'left' | 'right') => {
         const el = containerRef.current
@@ -45,6 +55,8 @@ export default function Carousel({ title, category }: Props) {
         el.scrollBy({ left: dir === 'left' ? -cardWidth * 3 : cardWidth * 3, behavior: 'smooth' })
     }
 
+    const data = externalItems ?? fetchedItems
+
     return (
         <div className="carousel">
             <h3>{title}</h3>
@@ -53,7 +65,7 @@ export default function Carousel({ title, category }: Props) {
                 <div className="carousel-items" ref={containerRef}>
                     {loading && <div className="loading">Loading…</div>}
                     {error && <div className="error">{error}</div>}
-                    {items.map((film) => (
+                    {data.map((film) => (
                         <Card key={film.id} film={film} to={`/film/${film.id}?category=${category}`} />
                     ))}
                 </div>
@@ -62,3 +74,4 @@ export default function Carousel({ title, category }: Props) {
         </div>
     )
 }
+
