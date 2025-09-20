@@ -43,39 +43,6 @@ Implementa una app para **navegar películas por categorías**, ver el **detalle
 - `src/lib/*`: tipos + utilidades para API.
 - `src/styles/*`: SCSS global + componentes + páginas.
 
-.
-├─ server/
-│  ├─ dev.js          # Express + Vite middleware (desarrollo)
-│  └─ prod.js         # Express sirviendo build SSR (preview/prod)
-├─ src/
-│  ├─ entry-client.tsx
-│  ├─ entry-server.tsx
-│  ├─ App.tsx
-│  ├─ pages/          # /, /film/:id, /wishlist, 404
-│  ├─ components/     # Header, Carousel, Card
-│  ├─ state/          # wishlistStore (Zustand)
-│  ├─ lib/            # types + API helpers (TMDB)
-│  └─ styles/         # SCSS global + componentes + páginas
-├─ e2e/               # tests E2E (Playwright)
-├─ fixtures/          # respuestas mock de TMDB para E2E
-├─ vitest.config.ts
-├─ playwright.config.ts
-├─ tsconfig.json
-└─ .env               # TMDB_API_KEY=...
-
-
-## Scripts disponibles
-npm run dev          # servidor de desarrollo (Vite + SSR)<br />
-npm run build        # build cliente + servidor SSR<br />
-npm run preview      # servidor Express en modo producción (SSR) -> 4173<br /><br />
-
-npm run test         # unit + integración (Vitest)<br />
-npm run test:ui      # Vitest en modo interactivo<br />
-npm run test:e2e     # Playwright (auto-arranca dev/preview según config)<br />
-npm run test:ci      # Vitest + Playwright en cadena<br /><br />
-
-npm run lint         # ESLint
-
 ## Ejecutar tests
 
 - Unit + integración:
