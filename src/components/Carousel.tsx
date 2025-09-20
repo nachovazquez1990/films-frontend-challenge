@@ -61,7 +61,11 @@ export default function Carousel({ title, category, items: externalItems }: Prop
         <div className="carousel">
             <h3>{title}</h3>
             <div className="carousel-wrapper">
-                <button className="carousel-btn left" onClick={() => scrollByCards('left')}>‹</button>
+                {
+                    data.length > 6 ?
+                        <button className="carousel-btn left" onClick={() => scrollByCards('left')}>‹</button>
+                        : <></>
+                }
                 <div className="carousel-items" ref={containerRef}>
                     {loading && <div className="loading">Loading…</div>}
                     {error && <div className="error">{error}</div>}
@@ -72,7 +76,11 @@ export default function Carousel({ title, category, items: externalItems }: Prop
                             <Card key={film.id} film={film} to={`/film/${film.id}?category=${film.category}`} />
                     ))}
                 </div>
-                <button className="carousel-btn right" onClick={() => scrollByCards('right')}>›</button>
+                {
+                    data.length > 6 ?
+                        <button className="carousel-btn right" onClick={() => scrollByCards('right')}>›</button>
+                        : <></>
+                }
             </div>
         </div>
     )
