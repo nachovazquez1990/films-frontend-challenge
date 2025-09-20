@@ -94,7 +94,7 @@ export default function Film() {
                         {!inWishlist ? (
                             <button
                                 className="btn"
-                                onClick={() => add({ id: movieId, title, img: poster })}
+                                onClick={() => add({ id: movieId, title, img: poster, category: category })}
                             >
                                 Add to wishlist
                             </button>

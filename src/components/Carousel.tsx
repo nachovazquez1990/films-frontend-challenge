@@ -66,7 +66,10 @@ export default function Carousel({ title, category, items: externalItems }: Prop
                     {loading && <div className="loading">Loading…</div>}
                     {error && <div className="error">{error}</div>}
                     {data.map((film) => (
-                        <Card key={film.id} film={film} to={`/film/${film.id}?category=${category}`} />
+                        category ?
+                            <Card key={film.id} film={film} to={`/film/${film.id}?category=${category}`} />
+                            :
+                            <Card key={film.id} film={film} to={`/film/${film.id}?category=${film.category}`} />
                     ))}
                 </div>
                 <button className="carousel-btn right" onClick={() => scrollByCards('right')}>›</button>

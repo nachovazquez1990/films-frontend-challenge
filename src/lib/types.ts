@@ -2,6 +2,7 @@ export type FilmCard = {
     id: number
     title: string
     img?: string
+    category?: 'adventure' | 'history' | 'animation'
 }
 
 export type TMDBMovieListItem = {
