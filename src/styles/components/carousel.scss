@@ -1,4 +1,4 @@
-@import '../_variables';
+@use '../variables' as *;
 
 .carousel {
     margin: 2rem 0;

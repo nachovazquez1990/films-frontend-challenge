@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Enviroment keys
+# Enviroment keys and test results
 .env
+test-results/

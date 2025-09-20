@@ -1,4 +1,4 @@
-@import '../_variables';
+@use '../variables' as *;
 
 .card {
     min-width: 160px;

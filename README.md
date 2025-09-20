@@ -43,6 +43,30 @@ Implementa una app para **navegar películas por categorías**, ver el **detalle
 - `src/lib/*`: tipos + utilidades para API.
 - `src/styles/*`: SCSS global + componentes + páginas.
 
+## Ejecutar tests
+
+- Unit + integración:
+  ```bash
+  npm run test
+  # o en modo interactivo
+  npm run test:ui
+  ```
+- E2E (con servidor en marcha en otra terminal `npm run dev` o `npm run preview`):
+  ```bash
+  npm run test:e2e
+  ```
+
+## Qué cubren los tests
+
+- `src/__tests__/wishlistStore.test.ts` — añadir/quitar/persistencia en `localStorage` y SSR-safe (no rompe sin `window`).
+- `src/__tests__/api.test.ts` — URLs correctas y normalización de datos (mocks de `fetch`).
+- `src/__tests__/Card.test.tsx` — render, acción de wishlist y navegación.
+- `src/__tests__/Film.test.tsx` — carga de detalle, fallback de imagen y wishlist.
+- `e2e/home.spec.ts` — carruseles cargan, navegación al detalle.
+- `e2e/wishlist.spec.ts` — persistencia tras recarga.
+- `e2e/a11y.spec.ts` — auditoría básica con axe.
+- `src/__tests__/ssr.test.ts` — `entry-server.render()` devuelve HTML sin tocar `window`.
+
 ## Tareas realizadas
 
 1 - Crear proyecto con "npm create vite@latest"<br />
@@ -54,3 +78,5 @@ Implementa una app para **navegar películas por categorías**, ver el **detalle
 6 - Crear estado persistente para la wishlist<br />
 7 - Recoger datos reales de TMBD<br />
 7 - Implementar SSR<br />
+7 - Crear estilos definitivos<br />
+7 - Tests<br />
